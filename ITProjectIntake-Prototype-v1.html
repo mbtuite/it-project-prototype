@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Global IT and AI Intake Form</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.css" />
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.js"></script>
+
+  <style>
+    :root {
+      --lek-green: #31a84a;
+      --lek-green-dark: #21843a;
+      --lek-gray: #50575c;
+      --soft-gray: #f4f6f7;
+      --border-gray: #dfe4e8;
+      --text-dark: #1f2a33;
+    }
+
+    body {
+      background: var(--soft-gray);
+      color: var(--text-dark);
+      font-size: 16px;
+    }
+
+    .app-header {
+      background: var(--lek-green);
+      color: white;
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .logo-box {
+      background: white;
+      color: var(--lek-gray);
+      min-width: 178px;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: 8px;
+      line-height: 1;
+    }
+
+    .logo-box .x-accent {
+      color: var(--lek-green);
+    }
+
+    .app-title {
+      flex: 1;
+      text-align: center;
+      font-size: 36px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      padding-right: 178px;
+    }
+
+    .main-shell {
+      max-width: 1180px;
+      margin: 32px auto;
+      padding: 0 22px 44px;
+    }
+
+    .intake-card {
+      background: white;
+      border: 1px solid var(--border-gray);
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(31, 42, 51, 0.08);
+      overflow: hidden;
+    }
+
+    .card-top {
+      padding: 26px 30px 18px;
+      border-bottom: 1px solid var(--border-gray);
+    }
+
+    .card-top h2 {
+      margin: 0 0 6px;
+      color: var(--lek-gray);
+      font-weight: 500;
+    }
+
+    .card-top p {
+      margin: 0;
+      color: #69757e;
+      font-size: 16px;
+    }
+
+    .wizard-area {
+      padding: 26px 30px 30px;
+    }
+
+    .ui.ordered.steps {
+      width: 100%;
+      margin-bottom: 22px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .ui.steps .active.step {
+      background: #eef9f1;
+    }
+
+    .ui.steps .active.step .title {
+      color: var(--lek-green-dark);
+    }
+
+    .ui.steps .completed.step .icon,
+    .ui.steps .completed.step:before {
+      color: var(--lek-green);
+    }
+
+    .ui.green.progress .bar {
+      background-color: var(--lek-green) !important;
+    }
+
+    .step-panel {
+      display: none;
+      animation: fadeIn 180ms ease-in;
+    }
+
+    .step-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 26px 0 20px;
+      color: var(--lek-gray);
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .section-heading i {
+      color: var(--lek-green);
+    }
+
+    .ui.form .field > label {
+      font-size: 15px;
+      color: #34414a;
+      margin-bottom: 8px;
+    }
+
+    .ui.form input[type="text"],
+    .ui.form input[type="date"],
+    .ui.form textarea,
+    .ui.selection.dropdown {
+      min-height: 50px;
+      border-radius: 8px;
+      border-color: #cfd8de;
+      font-size: 16px;
+    }
+
+    .ui.form textarea {
+      min-height: 135px;
+      line-height: 1.5;
+    }
+
+    .wizard-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border-gray);
+    }
+
+    .ui.primary.button,
+    .ui.primary.buttons .button {
+      background-color: var(--lek-green);
+    }
+
+    .ui.primary.button:hover,
+    .ui.primary.buttons .button:hover {
+      background-color: var(--lek-green-dark);
+    }
+
+    .muted-caption {
+      color: #7b858c;
+      font-size: 14px;
+    }
+
+    .review-panel {
+      border: 1px solid var(--border-gray);
+      border-radius: 12px;
+      background: #fbfcfd;
+      padding: 22px;
+      margin-top: 20px;
+    }
+
+    .score-display {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+      margin: 18px 0;
+    }
+
+    .score-circle {
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      border: 10px solid var(--lek-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--lek-gray);
+      background: white;
+    }
+
+    #feedbackList li {
+      margin: 8px 0;
+    }
+
+    @media (max-width: 760px) {
+      .app-title {
+        font-size: 24px;
+        padding-right: 0;
+        text-align: left;
+        padding-left: 18px;
+      }
+
+      .logo-box {
+        min-width: 118px;
+        font-size: 34px;
+        letter-spacing: 5px;
+      }
+
+      .ui.ordered.steps .step {
+        padding: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="logo-box">LE<span class="x-accent">K</span></div>
+    <div class="app-title">Global IT and AI Intake Form</div>
+  </header>
+
+  <main class="main-shell">
+    <div class="intake-card">
+      <div class="card-top">
+        <h2>IT Project Intake Pipeline</h2>
+        <p>Submit complete, high-quality requests for IT, digital tools, automation, and AI use cases before human review.</p>
+      </div>
+
+      <div class="wizard-area">
+        <div class="ui ordered steps" id="wizardSteps">
+          <div class="active step" data-step="0"><div class="content"><div class="title">Request Details</div></div></div>
+          <div class="step" data-step="1"><div class="content"><div class="title">Requirements</div></div></div>
+          <div class="step" data-step="2"><div class="content"><div class="title">Resources & Timeline</div></div></div>
+          <div class="step" data-step="3"><div class="content"><div class="title">Stakeholders & Testing</div></div></div>
+          <div class="step" data-step="4"><div class="content"><div class="title">AI Review</div></div></div>
+        </div>
+
+        <div class="ui green progress" id="completionProgress" data-percent="20">
+          <div class="bar"><div class="progress"></div></div>
+          <div class="label">20% Complete</div>
+        </div>
+
+        <form class="ui large form" id="intakeForm">
+          <section class="step-panel active" data-panel="0">
+            <div class="section-heading"><i class="clipboard outline icon"></i>Request Details</div>
+            <div class="field">
+              <label>Request Title</label>
+              <input type="text" name="requestTitle" placeholder="Example: AI-assisted contract review workflow" />
+            </div>
+            <div class="three fields">
+              <div class="field">
+                <label>Requestor</label>
+                <select class="ui dropdown" name="requestor">
+                  <option value="">Select requestor</option>
+                  <option>Alex Morgan</option><option>Megan Rapinoe</option><option>Tobin Heath</option><option>Christen Press</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Department</label>
+                <select class="ui dropdown" name="department">
+                  <option value="">Select department</option>
+                  <option>Consulting</option><option>Finance</option><option>Human Capital</option><option>Legal</option><option>Marketing</option><option>Operations</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Sponsor/Stakeholder</label>
+                <select class="ui dropdown" name="sponsor">
+                  <option value="">Select sponsor</option>
+                  <option>Executive Sponsor</option><option>Department Lead</option><option>Product Owner</option><option>Regional IT Lead</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label>Request Type</label>
+              <select class="ui dropdown" name="requestType">
+                <option value="">Select type</option>
+                <option>Project</option><option>Tool</option><option>AI Use Case</option><option>Automation</option><option>Reporting / Analytics</option><option>Process Improvement</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Brief Description</label>
+              <textarea name="description" placeholder="Summarize the request, who it helps, and why it matters."></textarea>
+            </div>
+          </section>
+
+          <section class="step-panel" data-panel="1">
+            <div class="section-heading"><i class="tasks icon"></i>Requirements</div>
+            <div class="field"><label>Business Problem</label><textarea name="businessProblem" placeholder="What business problem are you trying to solve?"></textarea></div>
+            <div class="field"><label>Functional Requirements</label><textarea name="functionalRequirements" placeholder="List capabilities, workflows, integrations, permissions, reports, or data needs."></textarea></div>
+            <div class="field"><label>Success Criteria</label><textarea name="successCriteria" placeholder="How will success be measured? Include metrics, adoption goals, time savings, or quality improvements."></textarea></div>
+          </section>
+
+          <section class="step-panel" data-panel="2">
+            <div class="section-heading"><i class="calendar alternate outline icon"></i>Resources & Timeline</div>
+            <div class="three fields">
+              <div class="field"><label>Start Date</label><input type="date" name="startDate" /></div>
+              <div class="field"><label>Target Completion Date</label><input type="date" name="targetDate" /></div>
+              <div class="field">
+                <label>Priority</label>
+                <select class="ui dropdown" name="priority">
+                  <option value="">Select priority</option>
+                  <option>Low</option><option>Medium</option><option>High</option><option>Critical</option>
+                </select>
+              </div>
+            </div>
+            <div class="field"><label>Resources Needed</label><textarea name="resourcesNeeded" placeholder="People, budget, tools, data access, vendors, or IT support required."></textarea></div>
+            <div class="field"><label>Risks/Constraints</label><textarea name="risks" placeholder="Known blockers, compliance needs, data sensitivity, timing constraints, or dependencies."></textarea></div>
+          </section>
+
+          <section class="step-panel" data-panel="3">
+            <div class="section-heading"><i class="users icon"></i>Stakeholders & Testing</div>
+            <div class="field"><label>Stakeholders</label><textarea name="stakeholders" placeholder="Who needs to be involved, informed, or approve this request?"></textarea></div>
+            <div class="field"><label>Beta Testers</label><textarea name="betaTesters" placeholder="Identify pilot users, teams, or regions available to test."></textarea></div>
+            <div class="field"><label>Testing Plan</label><textarea name="testingPlan" placeholder="Describe how the solution should be validated before launch."></textarea></div>
+          </section>
+
+          <section class="step-panel" data-panel="4">
+            <div class="section-heading"><i class="magic icon"></i>AI Review Panel</div>
+            <div class="ui info message">
+              <div class="header">Submission Quality Check</div>
+              Run a simulated AI review to identify missing information and improve readiness before IT triage.
+            </div>
+            <button type="button" class="ui primary large button" id="runReviewBtn"><i class="search icon"></i>Run AI Review</button>
+
+            <div class="review-panel" id="reviewPanel" style="display: none;">
+              <h3 class="ui header">AI Review Results</h3>
+              <div class="score-display">
+                <div class="score-circle" id="scoreCircle">0%</div>
+                <div>
+                  <div class="muted-caption">Readiness Status</div>
+                  <div id="statusLabel" class="ui large label">Pending</div>
+                </div>
+              </div>
+              <h4 class="ui header">Feedback</h4>
+              <ul id="feedbackList"></ul>
+            </div>
+          </section>
+
+          <div class="wizard-actions">
+            <button type="button" class="ui large button" id="backBtn"><i class="left arrow icon"></i>Back</button>
+            <span class="muted-caption" id="stepCaption">Step 1 of 5</span>
+            <button type="button" class="ui primary large button" id="nextBtn">Next<i class="right arrow icon"></i></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    $(function () {
+      $('.ui.dropdown').dropdown();
+      $('#completionProgress').progress({ percent: 20 });
+
+      let currentStep = 0;
+      const totalSteps = 5;
+
+      function updateWizard() {
+        $('.step-panel').removeClass('active');
+        $(`.step-panel[data-panel="${currentStep}"]`).addClass('active');
+
+        $('#wizardSteps .step').each(function () {
+          const step = Number($(this).data('step'));
+          $(this).removeClass('active completed');
+          if (step < currentStep) $(this).addClass('completed');
+          if (step === currentStep) $(this).addClass('active');
+        });
+
+        const percent = Math.round(((currentStep + 1) / totalSteps) * 100);
+        $('#completionProgress').progress({ percent });
+        $('#completionProgress .label').text(`${percent}% Complete`);
+
+        $('#backBtn').toggle(currentStep > 0);
+        $('#nextBtn').toggle(currentStep < totalSteps - 1);
+        $('#stepCaption').text(`Step ${currentStep + 1} of ${totalSteps}`);
+      }
+
+      $('#nextBtn').on('click', function () {
+        if (currentStep < totalSteps - 1) {
+          currentStep++;
+          updateWizard();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      $('#backBtn').on('click', function () {
+        if (currentStep > 0) {
+          currentStep--;
+          updateWizard();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      $('#wizardSteps .step').on('click', function () {
+        currentStep = Number($(this).data('step'));
+        updateWizard();
+      });
+
+      function fieldValue(name) {
+        return ($(`[name="${name}"]`).val() || '').trim();
+      }
+
+      $('#runReviewBtn').on('click', function () {
+        const fields = [
+          'requestTitle', 'requestor', 'department', 'sponsor', 'requestType', 'description',
+          'businessProblem', 'functionalRequirements', 'successCriteria',
+          'startDate', 'targetDate', 'priority', 'resourcesNeeded', 'risks',
+          'stakeholders', 'betaTesters', 'testingPlan'
+        ];
+
+        const missing = fields.filter(name => !fieldValue(name));
+        const completed = fields.length - missing.length;
+        let score = Math.round((completed / fields.length) * 100);
+        const feedback = [];
+
+        if (missing.length) {
+          feedback.push(`${missing.length} required section(s) appear incomplete. Add detail before submitting for human review.`);
+        } else {
+          feedback.push('All major intake sections are complete. The request is ready for IT triage.');
+        }
+
+        const longTextFields = ['description', 'businessProblem', 'functionalRequirements', 'successCriteria', 'resourcesNeeded', 'risks', 'stakeholders', 'testingPlan'];
+        longTextFields.forEach(name => {
+          const value = fieldValue(name);
+          if (value && value.length < 45) {
+            score = Math.max(0, score - 4);
+            feedback.push(`${labelFor(name)} may need more detail to support sizing and prioritization.`);
+          }
+        });
+
+        if (fieldValue('startDate') && fieldValue('targetDate') && fieldValue('targetDate') < fieldValue('startDate')) {
+          score = Math.max(0, score - 10);
+          feedback.push('Target completion date is earlier than the start date. Confirm the timeline.');
+        }
+
+        if (!fieldValue('successCriteria')) feedback.push('Define measurable success criteria such as adoption, savings, quality, or cycle-time improvement.');
+        if (!fieldValue('testingPlan')) feedback.push('Add a testing plan so reviewers can understand validation and rollout readiness.');
+        if (!fieldValue('risks')) feedback.push('Document risks, constraints, dependencies, or compliance considerations.');
+
+        score = Math.min(100, Math.max(0, score));
+
+        let statusClass = 'green';
+        let statusText = 'Ready';
+        if (score < 55) {
+          statusClass = 'red';
+          statusText = 'Low Quality';
+        } else if (score < 80) {
+          statusClass = 'yellow';
+          statusText = 'Needs Clarification';
+        }
+
+        $('#scoreCircle').text(`${score}%`);
+        $('#statusLabel').attr('class', `ui large ${statusClass} label`).text(statusText);
+        $('#feedbackList').empty();
+        feedback.forEach(item => $('#feedbackList').append(`<li>${item}</li>`));
+        $('#reviewPanel').transition('fade in');
+      });
+
+      function labelFor(name) {
+        const labels = {
+          description: 'Brief Description',
+          businessProblem: 'Business Problem',
+          functionalRequirements: 'Functional Requirements',
+          successCriteria: 'Success Criteria',
+          resourcesNeeded: 'Resources Needed',
+          risks: 'Risks/Constraints',
+          stakeholders: 'Stakeholders',
+          testingPlan: 'Testing Plan'
+        };
+        return labels[name] || name;
+      }
+
+      updateWizard();
+    });
+  </script>
+</body>
+</html>
