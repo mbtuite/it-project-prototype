@@ -17,6 +17,19 @@
       --soft-gray: #f4f6f7;
       --border-gray: #dfe4e8;
       --text-dark: #1f2a33;
+
+      --must-color: #c0392b;
+      --must-bg: #fdf2f2;
+      --must-border: #e8b4b0;
+      --should-color: #d35400;
+      --should-bg: #fdf6ec;
+      --should-border: #f0cfa0;
+      --could-color: #2471a3;
+      --could-bg: #eaf4fb;
+      --could-border: #a9cce3;
+      --wont-color: #616a6b;
+      --wont-bg: #f2f3f4;
+      --wont-border: #cacfd2;
     }
 
     body {
@@ -48,9 +61,7 @@
       line-height: 1;
     }
 
-    .logo-box .x-accent {
-      color: var(--lek-green);
-    }
+    .logo-box .x-accent { color: var(--lek-green); }
 
     .app-title {
       flex: 1;
@@ -80,21 +91,10 @@
       border-bottom: 1px solid var(--border-gray);
     }
 
-    .card-top h2 {
-      margin: 0 0 6px;
-      color: var(--lek-gray);
-      font-weight: 500;
-    }
+    .card-top h2 { margin: 0 0 6px; color: var(--lek-gray); font-weight: 500; }
+    .card-top p { margin: 0; color: #69757e; font-size: 16px; }
 
-    .card-top p {
-      margin: 0;
-      color: #69757e;
-      font-size: 16px;
-    }
-
-    .wizard-area {
-      padding: 26px 30px 30px;
-    }
+    .wizard-area { padding: 26px 30px 30px; }
 
     .ui.ordered.steps {
       width: 100%;
@@ -103,35 +103,19 @@
       overflow: hidden;
     }
 
-    .ui.steps .active.step {
-      background: #eef9f1;
-    }
-
-    .ui.steps .active.step .title {
-      color: var(--lek-green-dark);
-    }
-
+    .ui.steps .active.step { background: #eef9f1; }
+    .ui.steps .active.step .title { color: var(--lek-green-dark); }
     .ui.steps .completed.step .icon,
-    .ui.steps .completed.step:before {
-      color: var(--lek-green);
-    }
+    .ui.steps .completed.step:before { color: var(--lek-green); }
 
-    .ui.green.progress .bar {
-      background-color: var(--lek-green) !important;
-    }
+    .ui.green.progress .bar { background-color: var(--lek-green) !important; }
 
-    .step-panel {
-      display: none;
-      animation: fadeIn 180ms ease-in;
-    }
-
-    .step-panel.active {
-      display: block;
-    }
+    .step-panel { display: none; animation: fadeIn 180ms ease-in; }
+    .step-panel.active { display: block; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     .section-heading {
@@ -144,9 +128,7 @@
       font-weight: 600;
     }
 
-    .section-heading i {
-      color: var(--lek-green);
-    }
+    .section-heading i { color: var(--lek-green); }
 
     .ui.form .field > label {
       font-size: 15px;
@@ -164,10 +146,7 @@
       font-size: 16px;
     }
 
-    .ui.form textarea {
-      min-height: 135px;
-      line-height: 1.5;
-    }
+    .ui.form textarea { min-height: 135px; line-height: 1.5; }
 
     .wizard-actions {
       display: flex;
@@ -179,21 +158,13 @@
     }
 
     .ui.primary.button,
-    .ui.primary.buttons .button {
-      background-color: var(--lek-green);
-    }
-
+    .ui.primary.buttons .button { background-color: var(--lek-green); }
     .ui.primary.button:hover,
-    .ui.primary.buttons .button:hover {
-      background-color: var(--lek-green-dark);
-    }
+    .ui.primary.buttons .button:hover { background-color: var(--lek-green-dark); }
 
-    .muted-caption {
-      color: #7b858c;
-      font-size: 14px;
-    }
+    .muted-caption { color: #7b858c; font-size: 14px; }
 
-    .review-panel {
+    .review-summary {
       border: 1px solid var(--border-gray);
       border-radius: 12px;
       background: #fbfcfd;
@@ -201,49 +172,350 @@
       margin-top: 20px;
     }
 
-    .score-display {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      flex-wrap: wrap;
-      margin: 18px 0;
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
     }
 
-    .score-circle {
-      width: 118px;
-      height: 118px;
-      border-radius: 50%;
-      border: 10px solid var(--lek-green);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      font-weight: 700;
-      color: var(--lek-gray);
+    .summary-item {
       background: white;
+      border: 1px solid var(--border-gray);
+      border-radius: 10px;
+      padding: 14px;
     }
 
-    #feedbackList li {
-      margin: 8px 0;
+    .summary-label {
+      color: var(--lek-gray);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
     }
+
+    .summary-value { color: var(--text-dark); white-space: pre-wrap; line-height: 1.45; }
+
+    .confirmation-panel { display: none; margin-top: 24px; }
+
+    /* ===== MoSCoW Section ===== */
+
+    .moscow-intro {
+      background: #f8fafc;
+      border: 1px solid var(--border-gray);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 22px;
+    }
+
+    .moscow-intro h4 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      color: var(--lek-gray);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .moscow-intro h4 i { color: var(--lek-green); }
+
+    .moscow-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .moscow-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid;
+      cursor: help;
+    }
+
+    .moscow-pill.must   { background: var(--must-bg);   color: var(--must-color);   border-color: var(--must-border); }
+    .moscow-pill.should { background: var(--should-bg); color: var(--should-color); border-color: var(--should-border); }
+    .moscow-pill.could  { background: var(--could-bg);  color: var(--could-color);  border-color: var(--could-border); }
+    .moscow-pill.wont   { background: var(--wont-bg);   color: var(--wont-color);   border-color: var(--wont-border); }
+
+    .moscow-pill-desc {
+      font-size: 12px;
+      font-weight: 400;
+      opacity: 0.85;
+    }
+
+    /* Feature table */
+    .feature-section-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 24px 0 12px;
+    }
+
+    .feature-section-label span {
+      font-size: 15px;
+      font-weight: 700;
+      color: #34414a;
+    }
+
+    .add-feature-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--lek-green);
+      color: white;
+      border: none;
+      border-radius: 7px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .add-feature-btn:hover { background: var(--lek-green-dark); }
+
+    .feature-table-wrap {
+      border: 1px solid var(--border-gray);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .feature-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .feature-table thead tr {
+      background: #f0f4f7;
+    }
+
+    .feature-table thead th {
+      padding: 11px 14px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--lek-gray);
+      border-bottom: 1px solid var(--border-gray);
+    }
+
+    .feature-table tbody tr {
+      border-bottom: 1px solid #edf1f3;
+      transition: background 0.1s;
+    }
+
+    .feature-table tbody tr:last-child { border-bottom: none; }
+    .feature-table tbody tr:hover { background: #fafcfd; }
+
+    .feature-table td {
+      padding: 10px 14px;
+      vertical-align: middle;
+    }
+
+    .feature-name-cell {
+      min-width: 200px;
+    }
+
+    .feature-name-edit {
+      display: inline-block;
+      padding: 5px 8px;
+      border-radius: 5px;
+      border: 1px solid transparent;
+      min-width: 180px;
+      line-height: 1.4;
+      font-size: 14px;
+      color: var(--text-dark);
+      background: transparent;
+      transition: border-color 0.15s, background 0.15s;
+      cursor: text;
+      outline: none;
+    }
+
+    .feature-name-edit:hover {
+      border-color: #cfd8de;
+      background: #f8fafc;
+    }
+
+    .feature-name-edit:focus {
+      border-color: var(--lek-green);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(49,168,74,0.10);
+    }
+
+    .feature-name-edit:empty:before {
+      content: attr(data-placeholder);
+      color: #aab4bb;
+      font-style: italic;
+      pointer-events: none;
+    }
+
+    .feature-desc-edit {
+      display: inline-block;
+      padding: 5px 8px;
+      border-radius: 5px;
+      border: 1px solid transparent;
+      width: 100%;
+      min-width: 160px;
+      line-height: 1.4;
+      font-size: 13px;
+      color: #546169;
+      background: transparent;
+      transition: border-color 0.15s, background 0.15s;
+      cursor: text;
+      outline: none;
+    }
+
+    .feature-desc-edit:hover {
+      border-color: #cfd8de;
+      background: #f8fafc;
+    }
+
+    .feature-desc-edit:focus {
+      border-color: var(--lek-green);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(49,168,74,0.10);
+    }
+
+    .feature-desc-edit:empty:before {
+      content: attr(data-placeholder);
+      color: #aab4bb;
+      font-style: italic;
+      pointer-events: none;
+    }
+
+    /* Priority select in table */
+    .priority-select {
+      appearance: none;
+      -webkit-appearance: none;
+      padding: 6px 30px 6px 10px;
+      border-radius: 7px;
+      border: 1px solid #cfd8de;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2350575c' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 10px;
+      transition: border-color 0.15s;
+      min-width: 140px;
+    }
+
+    .priority-select:focus { outline: none; border-color: var(--lek-green); }
+
+    .priority-select[data-val="Must Have"]    { background-color: var(--must-bg);   color: var(--must-color);   border-color: var(--must-border); }
+    .priority-select[data-val="Should Have"]  { background-color: var(--should-bg); color: var(--should-color); border-color: var(--should-border); }
+    .priority-select[data-val="Could Have"]   { background-color: var(--could-bg);  color: var(--could-color);  border-color: var(--could-border); }
+    .priority-select[data-val="Won't Have"]   { background-color: var(--wont-bg);   color: var(--wont-color);   border-color: var(--wont-border); }
+
+    .delete-row-btn {
+      background: none;
+      border: none;
+      color: #b0bec5;
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 5px;
+      font-size: 15px;
+      line-height: 1;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .delete-row-btn:hover { color: #e53935; background: #fdecea; }
+
+    .reorder-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      align-items: center;
+    }
+
+    .move-btn {
+      background: none;
+      border: 1px solid #dfe4e8;
+      color: #7b8c96;
+      cursor: pointer;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.4;
+      transition: color 0.12s, background 0.12s, border-color 0.12s;
+    }
+
+    .move-btn:hover { color: var(--lek-green-dark); background: #eef9f1; border-color: var(--lek-green); }
+    .move-btn:disabled { opacity: 0.25; cursor: default; }
+    .move-btn:disabled:hover { color: #7b8c96; background: none; border-color: #dfe4e8; }
+
+    .edit-hint {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: #9eaab0;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    .edit-hint i { font-size: 12px !important; }
+
+    /* Feature summary in review */
+    .feature-summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .feature-summary-table thead tr { background: #f0f4f7; }
+    .feature-summary-table th {
+      padding: 8px 12px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--lek-gray);
+      border-bottom: 1px solid var(--border-gray);
+    }
+    .feature-summary-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #edf1f3;
+      vertical-align: top;
+    }
+    .feature-summary-table tr:last-child td { border-bottom: none; }
+
+    .summary-priority-badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid;
+    }
+
+    .summary-priority-badge.must   { background: var(--must-bg);   color: var(--must-color);   border-color: var(--must-border); }
+    .summary-priority-badge.should { background: var(--should-bg); color: var(--should-color); border-color: var(--should-border); }
+    .summary-priority-badge.could  { background: var(--could-bg);  color: var(--could-color);  border-color: var(--could-border); }
+    .summary-priority-badge.wont   { background: var(--wont-bg);   color: var(--wont-color);   border-color: var(--wont-border); }
 
     @media (max-width: 760px) {
-      .app-title {
-        font-size: 24px;
-        padding-right: 0;
-        text-align: left;
-        padding-left: 18px;
-      }
-
-      .logo-box {
-        min-width: 118px;
-        font-size: 34px;
-        letter-spacing: 5px;
-      }
-
-      .ui.ordered.steps .step {
-        padding: 1em;
-      }
+      .app-title { font-size: 24px; padding-right: 0; text-align: left; padding-left: 18px; }
+      .logo-box { min-width: 118px; font-size: 34px; letter-spacing: 5px; }
+      .ui.ordered.steps .step { padding: 1em; }
+      .summary-grid { grid-template-columns: 1fr; }
+      .moscow-legend { flex-direction: column; }
+      .feature-table thead { display: none; }
+      .feature-table td { display: block; }
     }
   </style>
 </head>
@@ -256,8 +528,8 @@
   <main class="main-shell">
     <div class="intake-card">
       <div class="card-top">
-        <h2>IT Project Intake Pipeline</h2>
-        <p>Submit complete, high-quality requests for IT, digital tools, automation, and AI use cases before human review.</p>
+        <h2>IT Project Intake Request</h2>
+        <p>Submit requests for IT projects, digital tools, automation, reporting, and AI use cases.</p>
       </div>
 
       <div class="wizard-area">
@@ -266,7 +538,7 @@
           <div class="step" data-step="1"><div class="content"><div class="title">Requirements</div></div></div>
           <div class="step" data-step="2"><div class="content"><div class="title">Resources & Timeline</div></div></div>
           <div class="step" data-step="3"><div class="content"><div class="title">Stakeholders & Testing</div></div></div>
-          <div class="step" data-step="4"><div class="content"><div class="title">AI Review</div></div></div>
+          <div class="step" data-step="4"><div class="content"><div class="title">Review & Submit</div></div></div>
         </div>
 
         <div class="ui green progress" id="completionProgress" data-percent="20">
@@ -275,6 +547,7 @@
         </div>
 
         <form class="ui large form" id="intakeForm">
+          <!-- Step 0: Request Details -->
           <section class="step-panel active" data-panel="0">
             <div class="section-heading"><i class="clipboard outline icon"></i>Request Details</div>
             <div class="field">
@@ -317,13 +590,76 @@
             </div>
           </section>
 
+          <!-- Step 1: Requirements + MoSCoW Feature List -->
           <section class="step-panel" data-panel="1">
             <div class="section-heading"><i class="tasks icon"></i>Requirements</div>
             <div class="field"><label>Business Problem</label><textarea name="businessProblem" placeholder="What business problem are you trying to solve?"></textarea></div>
             <div class="field"><label>Functional Requirements</label><textarea name="functionalRequirements" placeholder="List capabilities, workflows, integrations, permissions, reports, or data needs."></textarea></div>
             <div class="field"><label>Success Criteria</label><textarea name="successCriteria" placeholder="How will success be measured? Include metrics, adoption goals, time savings, or quality improvements."></textarea></div>
+
+            <!-- MoSCoW Feature Prioritization -->
+            <div class="section-heading" style="margin-top:32px;"><i class="list ol icon"></i>Feature Prioritization <span style="font-size:14px;font-weight:400;color:#9eaab0;margin-left:6px;">(MoSCoW Method)</span></div>
+
+            <div class="moscow-intro">
+              <h4><i class="info circle icon"></i>About the MoSCoW Method</h4>
+              <p style="margin:0;font-size:14px;color:#546169;line-height:1.6;">
+                MoSCoW is a prioritization framework that helps teams agree on what matters most. Assign each feature one of four categories to clarify scope and manage expectations with stakeholders.
+              </p>
+              <div class="moscow-legend">
+                <span class="moscow-pill must" title="Non-negotiable requirements. The project fails without these.">
+                  <i class="asterisk icon" style="margin:0;font-size:11px;"></i>
+                  Must Have
+                  <span class="moscow-pill-desc">— critical, non-negotiable</span>
+                </span>
+                <span class="moscow-pill should" title="Important but not vital. High value if included.">
+                  <i class="arrow up icon" style="margin:0;font-size:11px;"></i>
+                  Should Have
+                  <span class="moscow-pill-desc">— important, high value</span>
+                </span>
+                <span class="moscow-pill could" title="Nice to have. Include only if time and budget allow.">
+                  <i class="plus icon" style="margin:0;font-size:11px;"></i>
+                  Could Have
+                  <span class="moscow-pill-desc">— nice to have, low cost</span>
+                </span>
+                <span class="moscow-pill wont" title="Out of scope for this release, but acknowledged.">
+                  <i class="ban icon" style="margin:0;font-size:11px;"></i>
+                  Won't Have
+                  <span class="moscow-pill-desc">— out of scope this time</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="feature-section-label">
+              <span>Feature List</span>
+              <button type="button" class="add-feature-btn" id="addFeatureBtn">
+                <i class="plus icon" style="margin:0;"></i> Add Feature
+              </button>
+            </div>
+
+            <div class="feature-table-wrap">
+              <table class="feature-table" id="featureTable">
+                <thead>
+                  <tr>
+                    <th style="width:26%">Feature Name <span style="font-weight:400;opacity:.6;font-style:italic;">(click to edit)</span></th>
+                    <th style="width:34%">Description <span style="font-weight:400;opacity:.6;font-style:italic;">(click to edit)</span></th>
+                    <th style="width:22%">MoSCoW Priority</th>
+                    <th style="width:8%;text-align:center;">Order</th>
+                    <th style="width:10%"></th>
+                  </tr>
+                </thead>
+                <tbody id="featureTableBody">
+                  <!-- rows injected by JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="edit-hint">
+              <i class="pencil alternate icon"></i>
+              Click any feature name or description to edit it inline.
+            </div>
           </section>
 
+          <!-- Step 2: Resources & Timeline -->
           <section class="step-panel" data-panel="2">
             <div class="section-heading"><i class="calendar alternate outline icon"></i>Resources & Timeline</div>
             <div class="three fields">
@@ -341,6 +677,7 @@
             <div class="field"><label>Risks/Constraints</label><textarea name="risks" placeholder="Known blockers, compliance needs, data sensitivity, timing constraints, or dependencies."></textarea></div>
           </section>
 
+          <!-- Step 3: Stakeholders & Testing -->
           <section class="step-panel" data-panel="3">
             <div class="section-heading"><i class="users icon"></i>Stakeholders & Testing</div>
             <div class="field"><label>Stakeholders</label><textarea name="stakeholders" placeholder="Who needs to be involved, informed, or approve this request?"></textarea></div>
@@ -348,25 +685,33 @@
             <div class="field"><label>Testing Plan</label><textarea name="testingPlan" placeholder="Describe how the solution should be validated before launch."></textarea></div>
           </section>
 
+          <!-- Step 4: Review & Submit -->
           <section class="step-panel" data-panel="4">
-            <div class="section-heading"><i class="magic icon"></i>AI Review Panel</div>
-            <div class="ui info message">
-              <div class="header">Submission Quality Check</div>
-              Run a simulated AI review to identify missing information and improve readiness before IT triage.
-            </div>
-            <button type="button" class="ui primary large button" id="runReviewBtn"><i class="search icon"></i>Run AI Review</button>
+            <div class="section-heading"><i class="check circle outline icon"></i>Review & Submit</div>
 
-            <div class="review-panel" id="reviewPanel" style="display: none;">
-              <h3 class="ui header">AI Review Results</h3>
-              <div class="score-display">
-                <div class="score-circle" id="scoreCircle">0%</div>
-                <div>
-                  <div class="muted-caption">Readiness Status</div>
-                  <div id="statusLabel" class="ui large label">Pending</div>
+            <div class="ui info message">
+              <div class="header">Review your request before submitting</div>
+              After submission, your request will enter the IT intake queue. The IT team may use internal review tools to assess completeness, priority, risk, and routing before follow-up.
+            </div>
+
+            <div class="review-summary">
+              <h3 class="ui header">Request Summary</h3>
+              <p class="muted-caption">This summary is generated from the information entered in the previous steps.</p>
+              <div class="summary-grid" id="summaryGrid"></div>
+              <div id="featureSummarySection" style="margin-top:18px;display:none;">
+                <div class="summary-label" style="margin-bottom:10px;">Feature Prioritization (MoSCoW)</div>
+                <div style="border:1px solid var(--border-gray);border-radius:10px;overflow:hidden;">
+                  <table class="feature-summary-table" id="featureSummaryTable">
+                    <thead><tr><th>Feature</th><th>Description</th><th>Priority</th></tr></thead>
+                    <tbody id="featureSummaryBody"></tbody>
+                  </table>
                 </div>
               </div>
-              <h4 class="ui header">Feedback</h4>
-              <ul id="feedbackList"></ul>
+            </div>
+
+            <div class="confirmation-panel ui positive message" id="confirmationPanel">
+              <div class="header">Request submitted</div>
+              <p>Thank you. Your request has been submitted to the IT intake queue for review.</p>
             </div>
           </section>
 
@@ -387,6 +732,213 @@
 
       let currentStep = 0;
       const totalSteps = 5;
+      let featureRows = [];
+      let featureIdCounter = 0;
+
+      // ── Feature table helpers ──────────────────────────────────────────
+
+      const moscowOptions = ['Must Have', 'Should Have', 'Could Have', "Won't Have"];
+
+      function priorityClass(val) {
+        if (val === 'Must Have')   return 'must';
+        if (val === 'Should Have') return 'should';
+        if (val === 'Could Have')  return 'could';
+        if (val === "Won't Have")  return 'wont';
+        return '';
+      }
+
+      function buildSelectHtml(selectedVal) {
+        const opts = moscowOptions.map(o =>
+          `<option value="${o}"${o === selectedVal ? ' selected' : ''}>${o}</option>`
+        ).join('');
+        return `<select class="priority-select" data-val="${selectedVal}">${opts}</select>`;
+      }
+
+      function addFeatureRow(name, desc, priority) {
+        const id = ++featureIdCounter;
+        featureRows.push({ id, name: name || '', desc: desc || '', priority: priority || 'Must Have' });
+        renderFeatureTable();
+        return id;
+      }
+
+      function renderFeatureTable() {
+        const $tbody = $('#featureTableBody');
+        $tbody.empty();
+
+        if (featureRows.length === 0) {
+          $tbody.append(`
+            <tr id="feature-empty-row">
+              <td colspan="5" style="text-align:center;color:#aab4bb;padding:22px;font-style:italic;">
+                No features added yet. Click "Add Feature" to start.
+              </td>
+            </tr>
+          `);
+          return;
+        }
+
+        featureRows.forEach((row, idx) => {
+          const isFirst = idx === 0;
+          const isLast  = idx === featureRows.length - 1;
+          const tr = $(`
+            <tr data-id="${row.id}">
+              <td class="feature-name-cell">
+                <span
+                  class="feature-name-edit"
+                  contenteditable="true"
+                  data-placeholder="Feature name…"
+                  data-field="name"
+                >${escapeHtml(row.name)}</span>
+              </td>
+              <td>
+                <span
+                  class="feature-desc-edit"
+                  contenteditable="true"
+                  data-placeholder="Short description…"
+                  data-field="desc"
+                >${escapeHtml(row.desc)}</span>
+              </td>
+              <td>${buildSelectHtml(row.priority)}</td>
+              <td style="text-align:center;">
+                <div class="reorder-btns">
+                  <button type="button" class="move-btn move-up-btn" title="Move up" ${isFirst ? 'disabled' : ''}>▲</button>
+                  <button type="button" class="move-btn move-down-btn" title="Move down" ${isLast ? 'disabled' : ''}>▼</button>
+                </div>
+              </td>
+              <td>
+                <button type="button" class="delete-row-btn" title="Remove feature">
+                  <i class="trash alternate outline icon" style="margin:0;"></i>
+                </button>
+              </td>
+            </tr>
+          `);
+
+          // Contenteditable: sync on blur/input
+          tr.find('[contenteditable]').on('input blur', function () {
+            const field = $(this).data('field');
+            const val = $(this).text().trim();
+            const rowObj = featureRows.find(r => r.id === row.id);
+            if (rowObj) rowObj[field] = val;
+          });
+
+          // Priority select colour update
+          tr.find('.priority-select').on('change', function () {
+            const val = $(this).val();
+            $(this).attr('data-val', val);
+            const rowObj = featureRows.find(r => r.id === row.id);
+            if (rowObj) rowObj.priority = val;
+          });
+
+          // Move up
+          tr.find('.move-up-btn').on('click', function () {
+            const i = featureRows.findIndex(r => r.id === row.id);
+            if (i > 0) {
+              [featureRows[i - 1], featureRows[i]] = [featureRows[i], featureRows[i - 1]];
+              renderFeatureTable();
+            }
+          });
+
+          // Move down
+          tr.find('.move-down-btn').on('click', function () {
+            const i = featureRows.findIndex(r => r.id === row.id);
+            if (i < featureRows.length - 1) {
+              [featureRows[i], featureRows[i + 1]] = [featureRows[i + 1], featureRows[i]];
+              renderFeatureTable();
+            }
+          });
+
+          // Delete
+          tr.find('.delete-row-btn').on('click', function () {
+            featureRows = featureRows.filter(r => r.id !== row.id);
+            renderFeatureTable();
+          });
+
+          $tbody.append(tr);
+        });
+      }
+
+      $('#addFeatureBtn').on('click', function () {
+        addFeatureRow('', '', 'Must Have');
+        // Focus the newly added name cell
+        setTimeout(() => {
+          const $lastName = $('#featureTableBody tr:last .feature-name-edit');
+          $lastName.focus();
+          // Place cursor at end
+          const range = document.createRange();
+          const sel = window.getSelection();
+          range.selectNodeContents($lastName[0]);
+          range.collapse(false);
+          sel.removeAllRanges();
+          sel.addRange(range);
+        }, 50);
+      });
+
+      // Seed with one empty row to get people started
+      addFeatureRow('', '', 'Must Have');
+
+      // ── Wizard helpers ─────────────────────────────────────────────────
+
+      const summaryFields = [
+        ['Request Title', 'requestTitle'],
+        ['Requestor', 'requestor'],
+        ['Department', 'department'],
+        ['Sponsor/Stakeholder', 'sponsor'],
+        ['Request Type', 'requestType'],
+        ['Brief Description', 'description'],
+        ['Business Problem', 'businessProblem'],
+        ['Functional Requirements', 'functionalRequirements'],
+        ['Success Criteria', 'successCriteria'],
+        ['Start Date', 'startDate'],
+        ['Target Completion Date', 'targetDate'],
+        ['Priority', 'priority'],
+        ['Resources Needed', 'resourcesNeeded'],
+        ['Risks/Constraints', 'risks'],
+        ['Stakeholders', 'stakeholders'],
+        ['Beta Testers', 'betaTesters'],
+        ['Testing Plan', 'testingPlan']
+      ];
+
+      function fieldValue(name) {
+        return ($(`[name="${name}"]`).val() || '').trim();
+      }
+
+      function renderSummary() {
+        const html = summaryFields.map(([label, name]) => {
+          const value = fieldValue(name) || 'Not provided';
+          return `
+            <div class="summary-item">
+              <div class="summary-label">${label}</div>
+              <div class="summary-value">${escapeHtml(value)}</div>
+            </div>
+          `;
+        }).join('');
+        $('#summaryGrid').html(html);
+
+        // Feature summary
+        const populated = featureRows.filter(r => r.name || r.desc);
+        if (populated.length > 0) {
+          const rows = featureRows.map(r => {
+            const pc = priorityClass(r.priority);
+            return `<tr>
+              <td style="font-weight:600;">${escapeHtml(r.name || '—')}</td>
+              <td style="color:#546169;">${escapeHtml(r.desc || '—')}</td>
+              <td><span class="summary-priority-badge ${pc}">${escapeHtml(r.priority)}</span></td>
+            </tr>`;
+          }).join('');
+          $('#featureSummaryBody').html(rows);
+          $('#featureSummarySection').show();
+        } else {
+          $('#featureSummarySection').hide();
+        }
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&#039;');
+      }
 
       function updateWizard() {
         $('.step-panel').removeClass('active');
@@ -404,8 +956,14 @@
         $('#completionProgress .label').text(`${percent}% Complete`);
 
         $('#backBtn').toggle(currentStep > 0);
-        $('#nextBtn').toggle(currentStep < totalSteps - 1);
+        $('#nextBtn').html(currentStep === totalSteps - 1
+          ? 'Submit Request<i class="check icon"></i>'
+          : 'Next<i class="right arrow icon"></i>');
         $('#stepCaption').text(`Step ${currentStep + 1} of ${totalSteps}`);
+
+        if (currentStep === totalSteps - 1) {
+          renderSummary();
+        }
       }
 
       $('#nextBtn').on('click', function () {
@@ -413,6 +971,9 @@
           currentStep++;
           updateWizard();
           window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          $('#confirmationPanel').fadeIn(160);
+          $('#nextBtn').prop('disabled', true).html('Submitted<i class="check icon"></i>');
         }
       });
 
@@ -427,81 +988,8 @@
       $('#wizardSteps .step').on('click', function () {
         currentStep = Number($(this).data('step'));
         updateWizard();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
-
-      function fieldValue(name) {
-        return ($(`[name="${name}"]`).val() || '').trim();
-      }
-
-      $('#runReviewBtn').on('click', function () {
-        const fields = [
-          'requestTitle', 'requestor', 'department', 'sponsor', 'requestType', 'description',
-          'businessProblem', 'functionalRequirements', 'successCriteria',
-          'startDate', 'targetDate', 'priority', 'resourcesNeeded', 'risks',
-          'stakeholders', 'betaTesters', 'testingPlan'
-        ];
-
-        const missing = fields.filter(name => !fieldValue(name));
-        const completed = fields.length - missing.length;
-        let score = Math.round((completed / fields.length) * 100);
-        const feedback = [];
-
-        if (missing.length) {
-          feedback.push(`${missing.length} required section(s) appear incomplete. Add detail before submitting for human review.`);
-        } else {
-          feedback.push('All major intake sections are complete. The request is ready for IT triage.');
-        }
-
-        const longTextFields = ['description', 'businessProblem', 'functionalRequirements', 'successCriteria', 'resourcesNeeded', 'risks', 'stakeholders', 'testingPlan'];
-        longTextFields.forEach(name => {
-          const value = fieldValue(name);
-          if (value && value.length < 45) {
-            score = Math.max(0, score - 4);
-            feedback.push(`${labelFor(name)} may need more detail to support sizing and prioritization.`);
-          }
-        });
-
-        if (fieldValue('startDate') && fieldValue('targetDate') && fieldValue('targetDate') < fieldValue('startDate')) {
-          score = Math.max(0, score - 10);
-          feedback.push('Target completion date is earlier than the start date. Confirm the timeline.');
-        }
-
-        if (!fieldValue('successCriteria')) feedback.push('Define measurable success criteria such as adoption, savings, quality, or cycle-time improvement.');
-        if (!fieldValue('testingPlan')) feedback.push('Add a testing plan so reviewers can understand validation and rollout readiness.');
-        if (!fieldValue('risks')) feedback.push('Document risks, constraints, dependencies, or compliance considerations.');
-
-        score = Math.min(100, Math.max(0, score));
-
-        let statusClass = 'green';
-        let statusText = 'Ready';
-        if (score < 55) {
-          statusClass = 'red';
-          statusText = 'Low Quality';
-        } else if (score < 80) {
-          statusClass = 'yellow';
-          statusText = 'Needs Clarification';
-        }
-
-        $('#scoreCircle').text(`${score}%`);
-        $('#statusLabel').attr('class', `ui large ${statusClass} label`).text(statusText);
-        $('#feedbackList').empty();
-        feedback.forEach(item => $('#feedbackList').append(`<li>${item}</li>`));
-        $('#reviewPanel').transition('fade in');
-      });
-
-      function labelFor(name) {
-        const labels = {
-          description: 'Brief Description',
-          businessProblem: 'Business Problem',
-          functionalRequirements: 'Functional Requirements',
-          successCriteria: 'Success Criteria',
-          resourcesNeeded: 'Resources Needed',
-          risks: 'Risks/Constraints',
-          stakeholders: 'Stakeholders',
-          testingPlan: 'Testing Plan'
-        };
-        return labels[name] || name;
-      }
 
       updateWizard();
     });
